@@ -1,0 +1,55 @@
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+/*
+ * How to Check WebElement is Displayed, Enabled and Selected?
+  What are the Conditional Methods in Selenium WebDriver?
+*/
+
+
+
+public class CheckVisibilityOfWebelement {
+
+	public static void main(String[] args) {
+
+    WebDriverManager.chromedriver().setup();
+    WebDriver driver= new ChromeDriver();
+    driver.manage().window().maximize();
+    driver.get("https://demo.nopcommerce.com/register");
+    
+    //isDisplayed(), isEnabled()
+    
+    WebElement searchStore= driver.findElement(By.xpath("//input[@id='small-searchterms']"));
+    System.out.println("Displayed"+searchStore.isDisplayed()); //true
+    System.out.println("Enabled"+searchStore.isEnabled());
+    
+    // isSelected()
+    
+    WebElement male= driver.findElement(By.xpath("//input[@id='gender-male']"));
+    WebElement female=driver.findElement(By.xpath("//input[@id='gender-female']"));
+    
+    
+    // When we open a browser... both radio button...not selected..
+    // isSelected return value must be false
+    
+    System.out.println("Male selected"+male.isSelected()); // false
+    System.out.println("Female selected"+male.isSelected()); // false
+     
+    // We can select only one radio button at a time. if we click male then female isSelected() valye must be false
+
+    male.click();
+    System.out.println("Male selected"+ male.isSelected());
+    System.out.println("Female selected"+ female.isSelected());
+    
+    female.click();
+    System.out.println("Male selected"+ male.isSelected());
+    System.out.println("Female selected"+ female.isSelected());
+    
+	}
+
+}
